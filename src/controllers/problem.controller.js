@@ -14,4 +14,4 @@ function deleteProblem(req, res) {}
 
 function updateProblem(req, res) {}
 
-export const ProblemController = { addProblem, getProblem, getProblems, deleteProblem, updateProblem, pingProblemController };
+export const problemController = { addProblem, getProblem, getProblems, deleteProblem, updateProblem, pingProblemController };
