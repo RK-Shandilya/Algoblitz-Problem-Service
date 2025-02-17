@@ -1,5 +1,5 @@
 process.loadEnvFile()
 
 export default  {
-    PORT: process.env.PORT
+    PORT: process.env.PORT || 3000
 };
