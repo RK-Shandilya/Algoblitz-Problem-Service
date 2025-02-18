@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import BadRequest from "../errors/badrequest.error.js";
 
-function pingProblemController(req, res) {
+function pingProblemController(req, res, next) {
     return res.status(StatusCodes.ACCEPTED).json({message: "Problem controller is up"});
 }
 
@@ -13,14 +13,14 @@ function addProblem(req, res, next) {
     }
 }
 
-function getProblem(req, res) {}
+function getProblem(req, res, next) {}
 
-function getProblems(req, res) {
+function getProblems(req, res, next) {
     return res.status(200).json({message: "hello"});
 }
 
-function deleteProblem(req, res) {}
+function deleteProblem(req, res, next) {}
 
-function updateProblem(req, res) {}
+function updateProblem(req, res, next) {}
 
 export const problemController = { addProblem, getProblem, getProblems, deleteProblem, updateProblem, pingProblemController };
