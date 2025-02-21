@@ -20,4 +20,9 @@ export default class ProblemService {
         const problem = await this.problemRepository.getProblem(id);
         return problem;
     }
+
+    async deleteProblem(id) {
+        const deletedProblem = await this.problemRepository.deleteProblem(id);
+        return deletedProblem
+    }
 }
