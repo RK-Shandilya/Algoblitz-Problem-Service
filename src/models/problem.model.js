@@ -24,7 +24,10 @@ const problemSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    editorial: {
+        type: String
+    }
 })
 
 export default mongoose.model('Problem', problemSchema);
