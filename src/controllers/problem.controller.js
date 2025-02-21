@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
-import BadRequest from "../errors/badrequest.error.js";
 import  {ProblemService} from "../services/index.js";
 import  {ProblemRepository} from "../repositories/index.js"; 
+import NotFound from "../errors/notfound.error.js";
 
 const problemService = new ProblemService(new ProblemRepository());
 
@@ -23,7 +23,21 @@ async function addProblem(req, res, next) {
     }
 }
 
-function getProblem(req, res) {}
+async function getProblem(req, res, next) {
+    try {
+        const id = req.params.id;
+        const problem = await problemService.getProblem(id);
+
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problem fetched successfully",
+            data: problem,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
+}
 
 async function getProblems(req, res, next) {
     try {
