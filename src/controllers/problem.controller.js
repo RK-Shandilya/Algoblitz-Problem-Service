@@ -1,26 +1,85 @@
 import { StatusCodes } from "http-status-codes";
-import BadRequest from "../errors/badrequest.error.js";
+import  {ProblemService} from "../services/index.js";
+import  {ProblemRepository} from "../repositories/index.js"; 
+import NotFound from "../errors/notfound.error.js";
+
+const problemService = new ProblemService(new ProblemRepository());
 
 function pingProblemController(req, res) {
     return res.status(StatusCodes.ACCEPTED).json({message: "Problem controller is up"});
 }
 
-function addProblem(req, res, next) {
+async function addProblem(req, res, next) {
     try {
-        throw new BadRequest('Problem Name', {missing: ["Problem Name"]})
+        const newProblem = await problemService.createProblem(req.body);
+        return res.status(StatusCodes.CREATED).json({
+            success: true,
+            message: "Problem created successfully",
+            data: newProblem,
+            error: {}
+        });
     } catch (error) {
         next(error);
     }
 }
 
-function getProblem(req, res) {}
+async function getProblem(req, res, next) {
+    try {
+        const id = req.params.id;
+        const problem = await problemService.getProblem(id);
 
-function getProblems(req, res) {
-    return res.status(200).json({message: "hello"});
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problem fetched successfully",
+            data: problem,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
-function deleteProblem(req, res) {}
+async function getProblems(req, res, next) {
+    try {
+        const problems = await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problems fetched successfully",
+            data: problems,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
+}
 
-function updateProblem(req, res) {}
+async function deleteProblem(req, res, next) {
+    try {
+        const id = req.params.id;
+        const response = await problemService.deleteProblem(id);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problem deleted successfully",
+            data: response,
+            error: {}
+        }) 
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function updateProblem(req, res, next) {
+    try {
+        const updatedProblem = await problemService.updateProblem(req.params.id, req.body);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problem updated successfully",
+            data: updatedProblem,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
+}
 
 export const problemController = { addProblem, getProblem, getProblems, deleteProblem, updateProblem, pingProblemController };

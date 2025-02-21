@@ -2,6 +2,7 @@ import express from 'express'
 import  config  from './config/server.config.js'
 import apiRouter from './routes/index.js';
 import { errorHandler } from './utils/errorHandler.js';
+import dbConnect from './config/db.config.js';
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.get('/ping', (req, res)=> {
 
 app.use(errorHandler);
 
-app.listen(config.PORT, () => {
-    console.log(`Server is listening at ${config.PORT}`)
+app.listen(config.PORT, async() => {
+    console.log(`Server is listening at ${config.PORT}`);
+    await dbConnect();
+    console.log("Database connected");
 })
