@@ -25,8 +25,18 @@ async function addProblem(req, res, next) {
 
 function getProblem(req, res) {}
 
-function getProblems(req, res) {
-    return res.status(200).json({message: "hello"});
+async function getProblems(req, res, next) {
+    try {
+        const problems = await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problems fetched successfully",
+            data: problems,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
 function deleteProblem(req, res) {}

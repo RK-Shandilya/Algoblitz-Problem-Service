@@ -6,13 +6,13 @@ export default class ProblemService {
     }
 
     async createProblem(problemData) {
-        try{
-            problemData.description = sanitizeMarkdown(problemData.description);
-            const problem = await this.problemRepository.createProblem(problemData);
-            return problem;
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
+        problemData.description = sanitizeMarkdown(problemData.description);
+        const problem = await this.problemRepository.createProblem(problemData);
+        return problem;
+    }
+
+    async getAllProblems() {
+        const problems = await this.problemRepository.getAllProblems();
+        return problems;
     }
 }
