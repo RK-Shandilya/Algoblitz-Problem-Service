@@ -39,11 +39,23 @@ export default class ProblemRepository {
         try {
             const deletedProblem = await Problem.findByIdAndDelete(id);
             console.log("Problem not found", deletedProblem);
-            if(!deletedProblem || deletedProblem === null) {
-                console.log("Problem not found 111", deletedProblem);
+            if(!deletedProblem) {
                 throw new NotFound("Problem", id);
             }
             return deletedProblem;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    async updateProblem(id, problemData) {
+        try {
+            const updatedProblem = await Problem.findByIdAndUpdate(id, problemData, {new: true});
+            if(!updatedProblem) {
+                throw new NotFound("Problem", id);
+            }
+            return updatedProblem;
         } catch (error) {
             console.log(error);
             throw error;

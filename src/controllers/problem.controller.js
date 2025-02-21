@@ -68,6 +68,18 @@ async function deleteProblem(req, res, next) {
     }
 }
 
-function updateProblem(req, res) {}
+async function updateProblem(req, res, next) {
+    try {
+        const updatedProblem = await problemService.updateProblem(req.params.id, req.body);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "Problem updated successfully",
+            data: updatedProblem,
+            error: {}
+        })
+    } catch (error) {
+        next(error);
+    }
+}
 
 export const problemController = { addProblem, getProblem, getProblems, deleteProblem, updateProblem, pingProblemController };

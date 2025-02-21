@@ -25,4 +25,9 @@ export default class ProblemService {
         const deletedProblem = await this.problemRepository.deleteProblem(id);
         return deletedProblem
     }
+
+    async updateProblem(id, problemData) {
+        const updatedProblem = await this.problemRepository.updateProblem(id, problemData);
+        return updatedProblem
+    }
 }
