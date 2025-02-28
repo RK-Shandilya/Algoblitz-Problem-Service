@@ -1,3 +1,4 @@
+import logger from "../config/logger.config.js";
 import NotFound from "../errors/notfound.error.js";
 import  Problem  from "../models/problem.model.js";
 
@@ -38,8 +39,8 @@ export default class ProblemRepository {
     async deleteProblem(id) {
         try {
             const deletedProblem = await Problem.findByIdAndDelete(id);
-            console.log("Problem not found", deletedProblem);
             if(!deletedProblem) {
+                logger.error(`Problem with id: ${id} not found in database`);
                 throw new NotFound("Problem", id);
             }
             return deletedProblem;
