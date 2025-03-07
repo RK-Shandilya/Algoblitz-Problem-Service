@@ -5,7 +5,12 @@ import  Problem  from "../models/problem.model.js";
 export default class ProblemRepository {
     async createProblem(problemData) {
         try {
-            const problem = await Problem.create(problemData);
+            const problem = await Problem.create({
+                title: problemData.title,
+                description: problemData.description,
+                testCases: (problemData.testCases) ? problemData.testCases : [],
+                codeStubs: problemData.codeStubs
+            });
             return problem;
         } catch (error) {
             console.log(error);

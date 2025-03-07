@@ -1,6 +1,5 @@
 import winston from "winston";
 import "winston-mongodb";
-import { MongoClient } from "mongodb";
 import config from "../config/server.config.js";
 
 

@@ -1,7 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import  {ProblemService} from "../services/index.js";
 import  {ProblemRepository} from "../repositories/index.js"; 
-import NotFound from "../errors/notfound.error.js";
 
 const problemService = new ProblemService(new ProblemRepository());
 
