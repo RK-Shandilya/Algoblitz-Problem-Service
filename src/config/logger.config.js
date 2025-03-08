@@ -1,6 +1,6 @@
 import winston from "winston";
 import "winston-mongodb";
-import config from "../config/server.config.js";
+import config from "./server.config.js";
 
 
 const allowedTransports = [];
