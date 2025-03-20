@@ -3,12 +3,14 @@ import  config  from './config/server.config.js'
 import apiRouter from './routes/index.js';
 import { errorHandler } from './utils/errorHandler.js';
 import dbConnect from './config/db.config.js';
+import cors from 'cors';
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.text());
+app.use(cors());
 
 app.use('/api', apiRouter);
 

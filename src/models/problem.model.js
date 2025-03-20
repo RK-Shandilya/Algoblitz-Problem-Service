@@ -4,6 +4,7 @@ const problemSchema = new mongoose.Schema({
     title : {
         type: String,
         required: [true, "Problem title is required"],
+        trim: true
     },
     description: {
         type: String,
@@ -28,11 +29,12 @@ const problemSchema = new mongoose.Schema({
     codeStubs: [{
         language: {
             type: String,
-            enum: ["Java", "Cpp", "Python", "Rust", "Go", "Javascript"],
+            enum: ["java", "cpp", "python", "rust", "go", "javascript"],
             required: true
         },
         startSnippet: {
             type: String,
+            required: true
         },
         userSnippet: {
             type: String
@@ -43,6 +45,10 @@ const problemSchema = new mongoose.Schema({
     }],
     editorial: {
         type: String
+    },
+    tags: {
+        type: [String],
+        default: []
     }
 })
 
