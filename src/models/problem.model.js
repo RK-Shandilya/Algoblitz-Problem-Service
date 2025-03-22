@@ -49,7 +49,18 @@ const problemSchema = new mongoose.Schema({
     tags: {
         type: [String],
         default: []
-    }
+    },
+    referenceSolutions: [{
+        language: {
+          type: String,
+          enum: ["java", "cpp", "python", "rust", "go", "javascript"],
+          required: true
+        },
+        solution: {
+          type: String,
+          required: true
+        }
+      }]
 })
 
 export default mongoose.model('Problem', problemSchema);

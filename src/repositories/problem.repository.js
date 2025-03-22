@@ -16,7 +16,8 @@ export default class ProblemRepository {
                 codeStubs: problemData.codeStubs || [], 
                 difficulty: problemData.difficulty,
                 editorial: problemData.editorial || {},
-                tags: problemData.tags || []
+                tags: problemData.tags || [],
+                referenceSolutions: problemData.referenceSolutions || []
             });
 
             logger.info(`Problem created successfully: ${problem._id}`);
